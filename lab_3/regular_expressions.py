@@ -12,7 +12,7 @@ REGEX = {
     "height": r"^\d\.\d{2}$",
     "snils": r"^\d{11}$",
     "passport": r"^\d{2} \d{2} \d{6}$",
-    "occupation": r"^[А-Яа-яЁё\s-]+$",
+    "occupation": r"^[A-Za-zА-Яа-яЁё\s\-\.\(\)/]+$",
     "longitude": r"^-?\d{1,3}\.\d+$",
     "hex_color": r"^#[0-9a-fA-F]{6}$",
     "issn": r"^\d{4}-\d{4}$",

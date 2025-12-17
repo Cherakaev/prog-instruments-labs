@@ -95,25 +95,36 @@ class TennisGame2:
 
 
 class TennisGame3:
-    def __init__(self, player1Name, player2Name):
-        self.p1N = player1Name
-        self.p2N = player2Name
-        self.p1 = 0
-        self.p2 = 0
+    def __init__(self, player1_name, player2_name):
+        self.p1_name = player1_name
+        self.p2_name = player2_name
+        self.p1_score = 0
+        self.p2_score = 0
 
-    def won_point(self, n):
-        if n == self.p1N:
-            self.p1 += 1
+    def won_point(self, name):
+        if name == self.p1_name:
+            self.p1_score += 1
         else:
-            self.p2 += 1
+            self.p2_score += 1
 
     def score(self):
-        if (self.p1 < 4 and self.p2 < 4) and (self.p1 + self.p2 < 6):
-            p = ["Love", "Fifteen", "Thirty", "Forty"]
-            s = p[self.p1]
-            return s + "-All" if (self.p1 == self.p2) else s + "-" + p[self.p2]
-        else:
-            if (self.p1 == self.p2):
-                return "Deuce"
-            s = self.p1N if self.p1 > self.p2 else self.p2N
-            return "Advantage " + s if ((self.p1 - self.p2) * (self.p1 - self.p2) == 1) else "Win for " + s
+        if self.p1_score < 4 and self.p2_score < 4 and (self.p1_score + self.p2_score < 6):
+            return self._get_early_game_score()
+
+        if self.p1_score == self.p2_score:
+            return "Deuce"
+
+        return self._get_late_game_score()
+
+    def _get_early_game_score(self):
+        points_names = ["Love", "Fifteen", "Thirty", "Forty"]
+        s = points_names[self.p1_score]
+        if self.p1_score == self.p2_score:
+            return f"{s}-All"
+        return f"{s}-{points_names[self.p2_score]}"
+
+    def _get_late_game_score(self):
+        leader = self.p1_name if self.p1_score > self.p2_score else self.p2_name
+        is_advantage = abs(self.p1_score - self.p2_score) == 1
+
+        return f"Advantage {leader}" if is_advantage else f"Win for {leader}"

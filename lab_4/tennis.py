@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class TennisGame1:
     def __init__(self, player1_name, player2_name):
         self.player1_name = player1_name
@@ -87,10 +88,10 @@ class TennisGame2:
             return f"Advantage {self.player1_name}"
         return f"Advantage {self.player2_name}"
 
-    def SetP1Score(self, number):
+    def set_p1_score(self, number):
         self.p1_score = number
 
-    def SetP2Score(self, number):
+    def set_p2_score(self, number):
         self.p2_score = number
 
 
@@ -108,7 +109,9 @@ class TennisGame3:
             self.p2_score += 1
 
     def score(self):
-        if self.p1_score < 4 and self.p2_score < 4 and (self.p1_score + self.p2_score < 6):
+        # Разбиваем длинную строку условия на несколько
+        if (self.p1_score < 4 and self.p2_score < 4 and
+                (self.p1_score + self.p2_score < 6)):
             return self._get_early_game_score()
 
         if self.p1_score == self.p2_score:
@@ -124,7 +127,14 @@ class TennisGame3:
         return f"{s}-{points_names[self.p2_score]}"
 
     def _get_late_game_score(self):
-        leader = self.p1_name if self.p1_score > self.p2_score else self.p2_name
+        if self.p1_score > self.p2_score:
+            leader = self.p1_name
+        else:
+            leader = self.p2_name
+
         is_advantage = abs(self.p1_score - self.p2_score) == 1
 
-        return f"Advantage {leader}" if is_advantage else f"Win for {leader}"
+        if is_advantage:
+            return f"Advantage {leader}"
+        else:
+            return f"Win for {leader}"

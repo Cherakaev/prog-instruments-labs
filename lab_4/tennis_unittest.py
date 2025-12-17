@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-
 from tennis import TennisGame1, TennisGame2, TennisGame3
 
 test_cases = [
@@ -39,17 +38,17 @@ test_cases = [
     (15, 14, "Advantage player1", 'player1', 'player2'),
     (14, 15, "Advantage player2", 'player1', 'player2'),
 
-    (6, 4, 'Win for player1', 'player1', 'player2'), 
-    (4, 6, 'Win for player2', 'player1', 'player2'), 
-    (16, 14, 'Win for player1', 'player1', 'player2'), 
-    (14, 16, 'Win for player2', 'player1', 'player2'), 
+    (6, 4, 'Win for player1', 'player1', 'player2'),
+    (4, 6, 'Win for player2', 'player1', 'player2'),
+    (16, 14, 'Win for player1', 'player1', 'player2'),
+    (14, 16, 'Win for player2', 'player1', 'player2'),
 
     (6, 4, 'Win for One', 'One', 'player2'),
-    (4, 6, 'Win for Two', 'player1', 'Two'), 
+    (4, 6, 'Win for Two', 'player1', 'Two'),
     (6, 5, 'Advantage One', 'One', 'player2'),
-    (5, 6, 'Advantage Two', 'player1', 'Two'), 
-    
-    ]
+    (5, 6, 'Advantage Two', 'player1', 'Two'),
+]
+
 
 def play_game(TennisGame, p1Points, p2Points, p1Name, p2Name):
     game = TennisGame(p1Name, p2Name)
@@ -60,8 +59,9 @@ def play_game(TennisGame, p1Points, p2Points, p1Name, p2Name):
             game.won_point(p2Name)
     return game
 
+
 class TestTennis(unittest.TestCase):
-     
+
     def test_Score_Game1(self):
         for testcase in test_cases:
             (p1Points, p2Points, score, p1Name, p2Name) = testcase
@@ -79,7 +79,7 @@ class TestTennis(unittest.TestCase):
             (p1Points, p2Points, score, p1Name, p2Name) = testcase
             game = play_game(TennisGame3, p1Points, p2Points, p1Name, p2Name)
             self.assertEqual(score, game.score())
- 
+
+
 if __name__ == "__main__":
-    unittest.main() 
-        
+    unittest.main()
